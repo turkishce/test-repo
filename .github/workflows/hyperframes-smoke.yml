@@ -23,11 +23,17 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends ffmpeg
+
       - name: Report runner resources
         run: |
           nproc
           free -h
           ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
 
       - name: Ensure HyperFrames browser
         run: npx --yes hyperframes@0.8.189 browser ensure
